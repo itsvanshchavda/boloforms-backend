@@ -4,24 +4,20 @@ import cors from "cors";
 import dotenv from "dotenv";
 import pdfRoutes from "./routes/pdfRoutes.js";
 
-dotenv.config();
+dotenv.config({ override: true, quiet: true });
 
 const app = express();
 
-// Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// Routes
-app.use("/api/pdf", pdfRoutes);
+app.use("/api/v1", pdfRoutes);
 
-// Health check
 app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "PDF Signature API is running" });
 });
 
-// MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {

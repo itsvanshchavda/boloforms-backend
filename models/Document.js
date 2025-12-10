@@ -20,10 +20,19 @@ const DocumentSchema = new mongoose.Schema(
 
     fieldsData: {
       type: Array,
+      default: [],
     },
 
     signedAt: {
       type: Date,
+    },
+
+    cloudinaryPublicId: {
+      type: String,
+    },
+
+    isOriginal: {
+      type: Boolean,
     },
   },
   { timestamps: true }
