@@ -18,6 +18,10 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "PDF Signature API is running" });
 });
 
+app.get("/", (req, res) => {
+  res.send("Server is up and running 🚀");
+});
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
